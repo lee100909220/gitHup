@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            background:linear-gradient(#ff8c8f,#03aaea);
+            height:100vh;
+            color:#fff;
+            perspective: 1200px;
+        }
+        .stage{
+            width:240px;
+            height:240px;
+            transform-style: preserve-3d;
+            position: absolute;
+            left:0 ;  top:0;right:0;bottom:0;margin:auto;
+        }
+        .stage .face{
+            text-align: center;line-height:200px;font-size:30px;
+            background:#333;
+            width:100%;height:100%;position:absolute;
+            border-radius: 10px;
+        }
+        .face  .father{
+            display:flex;
+            width:100%;height:100%;
+        }
+        .pointer{
+            width:50px;height:50px;
+            border-radius: 50%;
+            background:red;margin:15px;
+        }
+        /*第一个面的点*/
+        .father1{
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: center;
+        }
+        /*第二个面的点*/
+        .father2{
+            flex-flow: row nowrap;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        .father2 .pointer:last-child{
+            align-self:flex-end;
+        }
+        /*第三个面的点*/
+        .father3{
+            flex-flow: row nowrap;
+            align-items:flex-start;
+            justify-content: space-between;
+        }
+        .father3 .pointer:last-child{
+            align-self:flex-end;
+        }
+        .father3 .pointer:nth-child(2){
+            align-self:center;
+        }
+        /*第四个面的点*/
+        .father4{
+            flex-flow: row;
+            align-items:flex-start;
+            justify-content: space-between;
+        }
+        .row{
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            width:80px;
+            height:100%;
+        }
+
+        /*第五个面的点*/
+        .father5{
+            flex-flow: row;
+            justify-content: space-between;
+        }
+        .father5 .cen{
+            justify-content: center;
+        }
+        /*第六个面的点*/
+        .father6{
+            flex-flow: row;
+            justify-content: space-between;
+        }
+        .father6 .row{
+            width:120px;
+            align-items: center;
+        }
+        .face:nth-child(1){
+            transform: translateZ(120px);
+        }
+        .face:nth-child(2){
+            transform: translateZ(-120px);
+        }
+        .face:nth-child(3){
+            transform:rotateX(90deg) translateZ(120px);
+        }
+        .face:nth-child(4){
+            transform:rotateX(-90deg) translateZ(120px);
+        }
+        .face:nth-child(5){
+            transform:rotateY(-90deg) translateZ(120px);
+        }
+        .face:nth-child(6){
+            transform:rotateY(90deg) translateZ(120px);
+        }
+        .btn{
+            width:100px;height:44px;line-height:44px;border-radius: 10px;
+            margin:0 auto;background:#fff;
+            position: absolute;left:0;right:0;top:500px;cursor: pointer;
+        }
+        @keyframes rota {
+            100%{
+                transform:rotateX(720deg) rotateY(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="stage">
+    <div class="face">
+        <div class="father father1">
+            <div class="pointer"></div>
+        </div>
+    </div>
+    <div class="face">
+        <div class="father father2">
+            <div class="pointer"></div>
+            <div class="pointer"></div>
+        </div>
+    </div>
+    <div class="face">
+        <div class="father father3">
+            <div class="pointer"></div>
+            <div class="pointer"></div>
+            <div class="pointer"></div>
+        </div>
+    </div>
+    <div class="face">
+        <div class="father father4">
+            <div class="row">
+                <div class="pointer"></div>
+                <div class="pointer"></div>
+            </div>
+            <div class="row">
+                <div class="pointer"></div>
+                <div class="pointer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="face">
+        <div class="father father5">
+            <div class="row">
+                <div class="pointer"></div>
+                <div class="pointer"></div>
+            </div>
+            <div class="row cen">
+                <div class="pointer"></div>
+            </div>
+            <div class="row">
+                <div class="pointer"></div>
+                <div class="pointer"></div>
+            </div>
+        </div>
+    </div>
+    <div class="face">
+        <div class="father father6">
+            <div class="row">
+                <div class="pointer"></div>
+                <div class="pointer"></div>
+                <div class="pointer"></div>
+            </div>
+            <div class="row">
+                <div class="pointer"></div>
+                <div class="pointer"></div>
+                <div class="pointer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="btn"></div>
+<script src="Javascript/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".btn").click(function(){
+            $(".stage").css({
+                transform:"rotateX(0deg) rotateY(0deg)",
+                animation:"rota 5s linear 0s 1"
+            }).on("webkitAnimationEnd",function(){
+                var a=["X","Y"];
+                var b=[0,90,180,-90,-180];
+                var num1=Math.floor(Math.random()*2);
+                var num2=Math.floor(Math.random()*5);
+                $(".stage").css({
+                    animation:"none",
+                    transform:"rotate"+a[num1]+"("+b[num2]+"deg)"
+                });
+                $(".stage").off("webkitAnimationEnd");
+            });
+        });
+    });
+</script>
+</body>
+</html>

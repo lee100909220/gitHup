@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/animate.css"/>
+    <style type="text/css">
+        body{
+            background:cornflowerblue;
+            overflow: hidden;
+        }
+        .bird {
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            margin: 20% auto;
+            background: -webkit-linear-gradient(top, #F0495D 50%, #EC494C 50%);
+            position: relative;
+
+        }
+        .eye{
+            width:20px;height:20px;background:#fff;
+            position: absolute;top:15px;right:15px;
+            border-radius: 50%;
+            border:4px solid #000;
+        }
+        .eye:after{
+            content: "";
+            width:5px;
+            height:5px;
+            border-radius: 50%;
+            background: #000;
+            position: absolute;
+            right:5px;bottom:5px;
+        }
+        .eye:before{
+            content: "";
+            width:15px;
+            height:3px;
+            background: #000;
+            position: absolute;
+            right:-19px;top:8px;
+        }
+        .a{
+            width:12px;height:12px;
+            background:#f98c9f;
+            border-radius: 50%;
+            position: absolute;
+            left:15px;
+            top:10px;
+        }
+        .a:after{
+            content: "";
+            width:6px;height:6px;
+            background:#f98c9f;
+            border-radius: 50%;
+            position: absolute;
+            left:18px;
+            top:5px;
+        }
+        .a:before{
+            content: "";
+            width:6px;height:6px;
+            background:#f98c9f;
+            border-radius: 50%;
+            position: absolute;
+            left:5px;
+            top:18px;
+        }
+        .first{
+            width:0px;
+            height:0px;
+            border:10px solid #FAC632;
+            border-top:10px solid transparent;
+            border-right:10px solid transparent;
+            position: absolute;
+            right:-20px;
+            top:30px;
+        }
+        .first:after{
+            content: "";
+            width:0px;
+            height:0px;
+            border:10px solid #fada64;
+            border-bottom:10px solid transparent;
+            border-right:10px solid transparent;
+            position: absolute;
+            left:-10px;
+            top:10px;
+        }
+        .last{
+            content: "";
+            width:0px;
+            height:0px;
+            border:16px solid #ED4A5F;
+            border-bottom:16px solid transparent;
+            border-left:16px solid transparent;
+            position: absolute;
+            left:-32px;
+            top:20px;
+        }
+        .cb{
+            content: "";
+            width:0px;
+            height:0px;
+            border:20px solid #B9333E;
+            border-bottom:20px solid transparent;
+            border-right:20px solid transparent;
+            position: absolute;
+            left:30px;
+            top:50px;
+            animation: fly 0.15s linear 0s infinite alternate;
+            transform-origin: top center;
+        }
+        @keyframes fly {
+            100%{
+                transform: rotateX(180deg);
+            }
+        }
+        .bird:hover .cb{
+            animation-play-state:paused;
+        }
+        .cloud{
+            width:100px;height:100px;
+            border-radius: 50%;
+            background:#fff;
+            margin:5% 0;
+            position:relative;
+            box-shadow: 80px 10px 0px #fff;
+            animation: in 7s linear 0s infinite;
+        }
+        .cloud:after{
+            content: "";
+            width:100px;height:100px;
+            border-radius: 50%;
+            background:#fff;
+            position:absolute;
+            left:50px;top:20px;
+        }
+        .cloud:before{
+            content: "";
+            width:100px;height:100px;
+            border-radius: 50%;
+            background:#fff;
+            position:absolute;
+            left:-30px;top:40px;
+        }
+        @keyframes  in{
+            0%{
+                transform: translate(1300px,0px);
+            }
+            100%{
+                transform: translate(-100px,0px);
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="cloud"></div>
+<div class="bird animated flip ">
+    <div class="eye"></div>
+    <div class="a"></div>
+    <div class="first"></div>
+    <div class="last"></div>
+    <div class="cb"></div>
+</div>
+</body>
+</html>

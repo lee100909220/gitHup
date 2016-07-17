@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<script type="text/javascript">
+    window.onload = function() {
+        var ajax = {
+            Xmlhttprequest: function() {
+                this.xhr = false;
+            },
+            request: function(url, data, callback, type) {
+                var xhr = new this.Xmlhttprequest();
+                xhr.request(url, data, callback, type);
+            }
+        }
+        //将{num:1,t:'a'}这种json数据格式转为num=1&t=a这种字符串形式
+        var json2str = function(data) {
+            var _data = [];
+            for (var key in data) {
+                _data.push(key + "=" + data[key]);
+            }
+            return _data.join('&');
+        }
+        ajax.Xmlhttprequest.prototype = {
+            createXmlHttpRequest: function() {
+                if (window.XMLHttpRequest) {
+                    return new XMLHttpRequest();
+                }
+                else {
+                    var a = ["MSXML2.XMLHTTP.6.0", "MSXML2.XMLHTTP.3.0","MSXML2.XMLHTTP"];
+                    for (var i = 0; i<a.length; i++) {
+                        try {
+                            return new ActiveXObject(a[i]);
+                        } catch (e) {}
+                    }
+                }
+            },
+            fnCallback: function(callback) {
+                if (this.xhr.readyState == 4 && this.xhr.status == 200) {
+                    callback?callback(this.xhr.responseText) :"";
+                }
+            },
+            request: function(url, data, callback, type) {
+                var that = this;
+                var ispost = type === "post"?true : false;
+                ispost?url : url += "?" + json2str(data);
+                this.xhr = this.createXmlHttpRequest();
+                this.xhr.open(type, url, true);
+                ispost?this.xhr.setRequestHeader("content-Type", "application/x-www-form-urlencoded;charset=utf-8") : '';
+                this.xhr.onreadystatechange = function() {
+                    that.fnCallback(callback);
+                };
+                this.xhr.send(ispost?json2str(data):null);
+            }
+        }
+
+
+
+        //调用
+        ajax.request("myimages/gwc.txt","",function(data) {
+            document.getElementsByTagName("body")[0].innerHTML=data;
+        }, 'post');
+    }
+</script>
+<body>
+</body>
+</html>
